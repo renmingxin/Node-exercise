@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="chat">
+        <div class="head">chat</div>
+        <div class="body"></div>
+        <div class="bottom">
+            <input class="chat-input" id="chatInput" type="text" onkeydown="send(event)"/>
+            <button class="send-btn" onclick="send(event)">发送</button>
+        </div>
+    </div>
+    <script>
+        function send(event) {
+            if(event instanceof KeyboardEvent && event.key !== 'Enter'){
+                return false;
+            }
+            let val = document.getElementById('chatInput').value;
+            if (val === null || val === ''){
+                return false;
+            }
+            let me = document.createElement('p');
+            let robot = document.createElement('p');
+            robot.style.textAlign = 'right';
+            robot.style.color = 'red';
+            me.innerText = `我:${val}`;
+            document.getElementsByClassName('body')[0].appendChild(me);
+            //此处发ajax请求
+            myAjax('GET','http://127.0.0.1:12306/chat?text='+val,'',data=>{
+                robot.innerText=`图灵:${data.text}`;
+                document.getElementsByClassName('body')[0].appendChild(robot);
+                document.getElementById('chatInput').value = '';
+            })
+        }
+        function myAjax(type='GET',url,params,callback){
+            let xmlHttp;
+            xmlHttp = new XMLHttpRequest();
+            if(type === 'GET'){
+                xmlHttp.open(type, url+params, true);
+                xmlHttp.send(null);
+            }else if(type === 'POST'){
+                xmlHttp.open(type,url);
+                xmlHttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+                xmlHttp.send(params)
+            }
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState === 4 && xmlHttp.status === 200){
+                    callback(JSON.parse(xmlHttp.responseText));
+                }
+            }
+        }
+    </script>
+</body>
+</html>

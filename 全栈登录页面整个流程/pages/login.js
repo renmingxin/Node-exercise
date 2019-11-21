@@ -2,7 +2,7 @@ window.onload = function(){
     // myAjax('GET','/getData2',data=>{
     //     console.log(data);
     // })
-}
+};
 function myAjax(type='GET',url,params,callback){
     let xmlHttp;
     xmlHttp = new XMLHttpRequest();
