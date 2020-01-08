@@ -56,6 +56,7 @@ http.createServer((request,response)=>{
                         console.log(obj.results[0].values);
                         response.writeHead(200,head);
                         response.write(JSON.stringify(obj.results[0].values));
+                        response.writableEnded(JSON.stringify(obj.results))
                         response.end();
                     }
                 }else {

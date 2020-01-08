@@ -31,7 +31,7 @@
             document.getElementsByClassName('body')[0].appendChild(me);
             //此处发ajax请求
             myAjax('GET','http://127.0.0.1:12306/chat?text='+val,'',data=>{
-                robot.innerText=`图灵:${data.text}`;
+                robot.innerText=`图灵:$ {data.text}`;
                 document.getElementsByClassName('body')[0].appendChild(robot);
                 document.getElementById('chatInput').value = '';
             })
