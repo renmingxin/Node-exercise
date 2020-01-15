@@ -18,23 +18,24 @@
                 </tr>
             </thead>
             <tbody id="tbody">
-
             </tbody>
-
         </table>
         <div>
             <input id="my-input" type="text" placeholder="输入姓名"/>
             <button onclick="queryByName()">查询</button>
         </div>
-        <div id="showMessage"></div>
+        <div id="showMessage">
+
+        </div>
     </div>
     <script>
 
         function queryByName(){
             let myInput = document.getElementById('my-input').value;
             let str = `name=${myInput}`;
-            myAjax('GET','/getStudentByName?'+ str, data=>{
-                console.log(JSON.stringify(data));
+            myAjax('GET','/getStudentByName?'+ str,'', data=>{
+                let message = document.getElementById('showMessage');
+                message.innerText = data;
             })
         }
 

@@ -16,7 +16,6 @@ function getStudentByName(request,response){
     let params = url.parse(request.url,true).query;
     let name = params.name;
     studentServive.queryStudentByName(name,success=>{
-        console.log(success);
         response.writeHead(200);
         response.write(JSON.stringify(success));
         response.end();

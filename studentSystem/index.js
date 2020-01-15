@@ -25,10 +25,10 @@ http.createServer((request,response)=>{
                 temp[1](request,response);
                 return
             }
-            response.writeHead(404);
-            response.write('<html><body><h1>404</h1></body></html>');
-            response.end();
         }
+        response.writeHead(404);
+        response.write('<html><body><h1>404</h1></body></html>');
+        response.end();
     }
 }).listen(12306);
 /*

@@ -20,8 +20,6 @@ function queryStudentByName(name,success){
     let connection = DBUtil.createConnection();
     connection.connect();
     connection.query(querySql,name,(error,result)=>{
-        console.log(error)
-        console.log(result);
         if(error){
             throw new Error(error);
         }else {
